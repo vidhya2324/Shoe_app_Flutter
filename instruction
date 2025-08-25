@@ -1,0 +1,11 @@
+>> firebase connection
+
+- create the project--> android or web or ios
+- then given the company name--> as  """namespace = "com.example.shop_app""""....taken from android/app/build.gradle
+- generate the file
+- download the google file
+- paste the google file in the build.gradle which is android/build.gradle
+- then its show like one code---> form that code, copy the implementation line
+- paste the line of code in the build.gradle in the dependencies place
+- In authentication section--> click the sign up option
+- then add the phone for the otp or email etc....

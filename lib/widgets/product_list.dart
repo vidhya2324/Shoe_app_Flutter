@@ -1,10 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:shop_app/global_variables.dart';
 import 'package:shop_app/widgets/product_card.dart';
 import 'package:shop_app/pages/product_details_page.dart';
 
 class ProductList extends StatefulWidget {
-  const ProductList({super.key});
+  final User? currentUser;
+  final VoidCallback showProfileMenu;
+
+  const ProductList({
+    super.key,
+    required this.currentUser,
+    required this.showProfileMenu,
+  });
 
   @override
   State<ProductList> createState() => _ProductListState();
@@ -22,18 +30,13 @@ class _ProductListState extends State<ProductList> {
   ];
 
   late String selectedFilters;
-  int currentPage = 0;
-
-  // ✅ Search controller
-  final TextEditingController searchController = TextEditingController();
   String searchQuery = '';
+  final TextEditingController searchController = TextEditingController();
 
   @override
   void initState() {
     super.initState();
     selectedFilters = filters[0];
-
-    // ✅ Listen to changes in the search field
     searchController.addListener(() {
       setState(() {
         searchQuery = searchController.text.toLowerCase();
@@ -51,16 +54,14 @@ class _ProductListState extends State<ProductList> {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
 
-    // ✅ FILTER BY brand + search query
     final filteredProducts = products.where((product) {
-      final companyMatch =
-          selectedFilters == 'All' ||
+      final companyMatch = selectedFilters == 'All' ||
           product['company'].toString().toLowerCase() ==
               selectedFilters.toLowerCase();
 
       final titleMatch = product['title'].toString().toLowerCase().contains(
-        searchQuery.toLowerCase(),
-      );
+            searchQuery.toLowerCase(),
+          );
 
       return companyMatch && titleMatch;
     }).toList();
@@ -68,7 +69,7 @@ class _ProductListState extends State<ProductList> {
     return SafeArea(
       child: Column(
         children: [
-          // 🟡 Header + Search
+          // 🟡 Header Row: Search + Profile
           Container(
             height: 90,
             padding: const EdgeInsets.all(8),
@@ -84,7 +85,7 @@ class _ProductListState extends State<ProductList> {
                     elevation: 6,
                     borderRadius: BorderRadius.circular(20),
                     child: TextField(
-                      controller: searchController, // ✅ Controller added
+                      controller: searchController,
                       cursorWidth: 2,
                       cursorColor: Colors.black,
                       decoration: InputDecoration(
@@ -104,6 +105,20 @@ class _ProductListState extends State<ProductList> {
                           horizontal: 8,
                         ),
                       ),
+                    ),
+                  ),
+                ),
+                const SizedBox(width: 10),
+                GestureDetector(
+                  onTap: widget.showProfileMenu,
+                  child: CircleAvatar(
+                    backgroundColor: Colors.blue,
+                    child: Text(
+                      widget.currentUser?.email != null &&
+                              widget.currentUser!.email!.isNotEmpty
+                          ? widget.currentUser!.email![0].toUpperCase()
+                          : "?",
+                      style: const TextStyle(color: Colors.white, fontSize: 20),
                     ),
                   ),
                 ),
@@ -131,13 +146,8 @@ class _ProductListState extends State<ProductList> {
                       backgroundColor: selectedFilters == filter
                           ? Colors.yellow
                           : const Color.fromRGBO(245, 247, 249, 1),
-                      side: const BorderSide(
-                        color: Color.fromRGBO(245, 247, 249, 1),
-                      ),
-                      label: Text(
-                        filter,
-                        style: const TextStyle(color: Colors.black),
-                      ),
+                      label: Text(filter,
+                          style: const TextStyle(color: Colors.black)),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(20),
                       ),
@@ -148,16 +158,16 @@ class _ProductListState extends State<ProductList> {
             ),
           ),
 
-          // 🟡 Product list
+          // 🟡 Product List
           Expanded(
             child: size.width > 650
                 ? GridView.builder(
                     itemCount: filteredProducts.length,
                     gridDelegate:
                         const SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 2,
-                          childAspectRatio: 2,
-                        ),
+                      crossAxisCount: 2,
+                      childAspectRatio: 2,
+                    ),
                     itemBuilder: (context, index) {
                       final product = filteredProducts[index];
                       return GestureDetector(
