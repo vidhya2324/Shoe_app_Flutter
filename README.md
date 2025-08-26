@@ -1,16 +1,35 @@
-# shop_app
+# 👟 Shoe Shopping App
 
-A new Flutter project.
+A simple and modern **Shoe Shopping Application** built using **Flutter**.  
+This project demonstrates how to create an e-commerce style app with features like product listing, product details, cart management, and checkout system.  
 
-## Getting Started
+---
+# Deployed App
+https://shoe-app-flutter.vercel.app/
 
-This project is a starting point for a Flutter application.
 
-A few resources to get you started if this is your first Flutter project:
+---
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+## 🚀 Features
+- 🛒 Browse shoes with images, price, and description  
+- 🔎 View product details  
+- ➕ Add shoes to cart  
+- ➖ Remove shoes from cart  
+- 💰 Checkout with total price calculation  
+- 📱 Responsive UI  
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+---
+
+## 📸 Screenshots  
+(Add screenshots of your app here if you have them)
+
+---
+
+## 🛠️ Tech Stack
+- **Framework:** Flutter  
+- **Language:** Dart  
+- **State Management:** Provider / setState (based on your implementation)  
+- **IDE:** VS Code / Android Studio  
+
+---
+
