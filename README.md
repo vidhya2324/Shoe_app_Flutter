@@ -5,7 +5,10 @@ This project demonstrates how to create an e-commerce style app with features li
 
 ---
 # Deployed App
-https://shoe-app-flutter.vercel.app/
+# https://shoe-app-flutter.vercel.app/
+
+
+!["C:\Users\dell\Downloads\shoe_app.png"](https://github.com/vidhya2324/Shoe_app_Flutter/blob/main/assets/images/shoe_app.png?raw=true)
 
 
 ---
@@ -20,11 +23,6 @@ https://shoe-app-flutter.vercel.app/
 
 ---
 
-## 📸 Screenshots  
-(Add screenshots of your app here if you have them)
-
----
-
 ## 🛠️ Tech Stack
 - **Framework:** Flutter  
 - **Language:** Dart  
@@ -32,4 +30,11 @@ https://shoe-app-flutter.vercel.app/
 - **IDE:** VS Code / Android Studio  
 
 ---
+
+# Deployment Process for flutter in vercel:
+Build Command → flutter/bin/flutter build web --release
+Output Directory → build/web
+Install Command → if [ -d flutter ]; then cd flutter && git pull && cd ..; else git clone https://github.com/flutter/flutter.git; fi && ls && flutter/bin/flutter doctor && flutter/bin/flutter clean && flutter/bin/flutter config --enable-web
+
+
 
